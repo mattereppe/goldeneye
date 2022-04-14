@@ -10,7 +10,7 @@ spec:
       hostname: goldeneye
       containers:
         - name: goldeneye
-          image: goldeneye
+          image: ghcr.io/mattereppe/goldeneye:main
           env:
             - name: WORKERS
               value: "5"
