@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: goldeneye
+  labels: 
+    ddos: goldeneye
+spec:
+  template:
+    spec:
+      hostname: goldeneye
+      containers:
+        - name: goldeneye
+          image: goldeneye
+          env:
+            - name: WORKERS
+              value: "5"
+            - name: SOCKETS
+              value: "2"
+            - name: METHOD
+              value: "get"
+            - name: URL
+              value: "https://guard-test-department-0.maggiolicloud.it/"
+      restartPolicy: OnFailure
