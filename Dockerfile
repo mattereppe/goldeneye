@@ -25,7 +25,5 @@ RUN apt-get update && \
 
 WORKDIR /usr/src/goldeneye
 
-#CMD echo ${URL}
-#CMD ./goldeneye.py -w $WORKERS -s $SOCKETS -m $METHOD # ${URL}
+
 CMD ./goldeneye.py $URL
-#CMD echo $URL
