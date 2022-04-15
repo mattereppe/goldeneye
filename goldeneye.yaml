@@ -11,6 +11,7 @@ spec:
       containers:
         - name: goldeneye
           image: ghcr.io/mattereppe/goldeneye:main
+          imagePullPolicy: Always
           env:
             - name: WORKERS
               value: "5"
