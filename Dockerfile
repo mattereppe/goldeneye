@@ -8,7 +8,7 @@ from debian:bullseye
 
 # Goldeneye main parameters
 ENV WORKERS=10
-ENV SOCKETS=500
+ENV SOCKETS=50
 ENV METHOD=get
 
 # Default to MAGGIOLI testbed
