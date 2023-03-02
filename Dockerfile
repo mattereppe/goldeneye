@@ -22,7 +22,7 @@ RUN apt-get update && \
 	git clone https://github.com/jseidl/GoldenEye.git .
 
 COPY goldeneye-exit-status.patch /usr/src/goldeneye
-RUN cd goldeneye && \
+RUN cd /usr/src/goldeneye && \
 	patch -p0 goldeneye.py 
 	
 

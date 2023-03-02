@@ -3,6 +3,8 @@
 Goldeneye DDoS Attack simulator setup. This includes the Dockerfile for building a container 
 and the Kubernetes manifest for running a job.
 
+The original project has been patched to return an error value in case the connection to the server fails. This is useful to make the application resilient when run in a cloud-native environment.
+
 # Usage
 
 The documentation of the goldeneye software is available at: https://github.com/jseidl/GoldenEye. Unfortunately, the project is not more active and maintained. 
