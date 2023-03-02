@@ -1,0 +1,56 @@
+--- goldeneye.py	2023-03-02 17:29:04
++++ goldeneye2.py	2023-03-02 17:31:11
+@@ -39,7 +39,7 @@
+ BY USING THIS SOFTWARE YOU AGREE WITH THESE TERMS.
+ """
+ 
+-from multiprocessing import Process, Manager, Pool
++from multiprocessing import Process, Manager, Pool, Value
+ import urllib.parse, ssl
+ import sys, getopt, random, time, os
+ import http.client
+@@ -135,6 +135,8 @@
+         # Initialize Counters
+         self.counter = self.manager.list((0, 0))
+ 
++        # Track failed workers to return error on exit
++        self.failed = False
+ 
+     def exit(self):
+         self.stats()
+@@ -201,6 +203,8 @@
+                         worker.join(JOIN_TIMEOUT)
+                     else:
+                         self.workersQueue.remove(worker)
++                    if worker is not None:
++                        self.failed = self.failed or worker.failed.value
+ 
+                 self.stats()
+ 
+@@ -253,6 +257,7 @@
+ 
+         self.counter = counter
+         self.nr_socks = nr_sockets
++        self.failed = Value('b',False)
+ 
+         parsedUrl = urllib.parse.urlparse(url)
+ 
+@@ -335,6 +340,8 @@
+                 self.closeConnections()
+ 
+             except:
++                self.failed.value = True
++                self.runnable = False
+                 self.incFailed()
+                 if DEBUG:
+                     raise
+@@ -630,6 +637,9 @@
+         goldeneye.nr_sockets = socks
+ 
+         goldeneye.fire()
++
++        if goldeneye.failed:
++            sys.exit(2)
+ 
+     except getopt.GetoptError as err:
+ 

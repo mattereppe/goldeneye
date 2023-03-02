@@ -10,9 +10,8 @@ from debian:bullseye
 ENV WORKERS=10
 ENV SOCKETS=50
 ENV METHOD=get
-
-# Default to MAGGIOLI testbed
-ENV URL="https://guard-test-department-0.maggiolicloud.it/"
+# Default to  localhost
+ENV URL="http://localhost"
 
 # Clone the goldeneye repository from github
 RUN apt-get update && \
@@ -20,7 +19,11 @@ RUN apt-get update && \
 	cd /usr/src/ && \
 	mkdir goldeneye && \
 	cd goldeneye && \
-	git clone https://github.com/jseidl/GoldenEye.git . 
+	git clone https://github.com/jseidl/GoldenEye.git .
+
+COPY goldeneye-exit-status.patch /usr/src/goldeneye
+RUN cd goldeneye && \
+	patch -p0 goldeneye.py 
 	
 
 WORKDIR /usr/src/goldeneye
