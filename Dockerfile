@@ -23,7 +23,7 @@ RUN apt-get update && \
 
 COPY goldeneye-exit-status.patch /usr/src/goldeneye
 RUN cd /usr/src/goldeneye && \
-	patch -p0 goldeneye.py 
+	patch -p0 goldeneye.py goldeneye-exit-status.patch
 	
 
 WORKDIR /usr/src/goldeneye
