@@ -16,4 +16,4 @@ The Docker version provided by this package includes the following environment v
 
 # Notes
 
-The original project has been patched to return an error value in case the connection to the server fails. This is useful to make the application resilient when run in a cloud-native environment.
+The original project has been patched to return an error value in case the connection to the server fails. This is useful to make the application resilient when run in a cloud-native environment. 
