@@ -35,13 +35,13 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3 #v3.3.0 at the time of change
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
         if: github.event_name != 'pull_request'
-        uses: actions/checkout@v3 #v3.3.0 at the time of change
+        uses: sigstore/cosign-installer@v3 #v3.0.1 at the time of change
         with:
           cosign-release: 'v2.0.0'  # This is the default for installer v3
 
